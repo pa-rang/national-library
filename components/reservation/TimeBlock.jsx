@@ -43,10 +43,10 @@ const TimeBlockWrapper = styled.div`
   }
 `;
 
-const TimeBlock = ({ isPossible }) => {
+const TimeBlock = ({ isPossible, time }) => {
   return (
     <TimeBlockWrapper isPossible={isPossible}>
-      <div className="time">10</div>
+      <div className="time">{time}</div>
       <div className="time-blocks">
         <div className="time-block"></div>
         <div className="time-block"></div>

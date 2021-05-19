@@ -63,6 +63,8 @@ const SpaceCardWrapper = styled.div`
   }
 `;
 
+const timeList = [10, 11, 12, 13, 14, 15, 16];
+
 const SpaceCard = ({ isPossible, cardNum }) => {
   return (
     <SpaceCardWrapper isPossible={isPossible}>
@@ -73,12 +75,9 @@ const SpaceCard = ({ isPossible, cardNum }) => {
         </div>
         <div className="card__info__people">수용인원: 1명</div>
         <div className="card__info__time-blocks">
-          <TimeBlock isPossible={isPossible} />
-          <TimeBlock isPossible={isPossible} />
-          <TimeBlock isPossible={isPossible} />
-          <TimeBlock isPossible={isPossible} />
-          <TimeBlock isPossible={isPossible} />
-          <TimeBlock isPossible={isPossible} />
+          {timeList.map((time) => (
+            <TimeBlock isPossible={isPossible} time={time} />
+          ))}
         </div>
       </div>
     </SpaceCardWrapper>
