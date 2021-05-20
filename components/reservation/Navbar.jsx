@@ -16,23 +16,26 @@ const NavbarWrapper = styled.div`
     padding: 24px;
     justify-content: center;
     align-items: center;
+    position: relative;
   }
 
   .nav__menu {
     flex: 1;
-    cursor: pointer;
   }
 
   .nav__logo {
     display: flex;
     align-items: center;
     flex: 3;
+    margin-bottom: 15px;
 
     & > p {
       display: none;
       font-weight: 500;
       font-size: 15px;
-      margin-bottom: 6px;
+      position: absolute;
+      bottom: 22px;
+      left: 290px;
     }
   }
 
@@ -69,18 +72,18 @@ const Navbar = () => {
       <div className="nav-container">
         <div className="nav__menu">
           <Image
-            width="18px"
-            height="16px"
+            width="30px"
+            height="30px"
             alt=""
-            src="/assets/icons/MenuIcon.png"
+            src="/assets/icons/MenuIcon.svg"
           />
         </div>
         <div className="nav__logo">
           <Image
             src="/assets/images/Logo.png"
             alt=""
-            width="200px"
-            height="60px"
+            width="320px"
+            height="100px"
           />
           <p>디지털도서관 예약시스템</p>
         </div>
