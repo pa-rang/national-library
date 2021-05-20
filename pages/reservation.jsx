@@ -69,6 +69,9 @@ const ReservationWrapper = styled.div`
       font-size: 12px;
       font-weight: 500;
       margin-top: 5px;
+      & > span {
+        display: block;
+      }
     }
   }
 
@@ -106,6 +109,10 @@ const ReservationWrapper = styled.div`
       margin: 19px 0 159px;
       width: 230px;
       align-self: center;
+
+      & > span {
+        display: block;
+      }
 
       &--hidden {
         width: 800px;
@@ -161,6 +168,9 @@ const ReservationWrapper = styled.div`
       &__detail {
         margin-left: 9px;
         font-size: 21px;
+        & > span {
+          display: inline;
+        }
       }
 
       &__cards {
@@ -184,8 +194,12 @@ const ReservationWrapper = styled.div`
 
       &__detail {
         margin-bottom: 32px;
-        width: 470px;
+        width: 600px;
         font-size: 18px;
+
+        & > span {
+          display: inline;
+        }
 
         &--hidden {
           display: block;
@@ -278,8 +292,8 @@ function Reservation() {
             <div className="content__space__header">
               <div className="content__space__title">공간선택</div>
               <div className="content__space__detail">
-                코로나 19로 인한 제한 운영 시, <br />
-                스튜디오 1~6번은 1명만 이용 가능합니다.
+                <span>코로나 19로 인한 제한 운영 시, </span>
+                <span>스튜디오 1~6번은 1명만 이용 가능합니다.</span>
               </div>
             </div>
             <hr />
@@ -307,8 +321,8 @@ function Reservation() {
               ))}
             </div>
             <div className="content__tools__detail">
-              스튜디오 대여 장비는 <br />
-              예약 신청에 의해서만 사용이 가능합니다.
+              <span>스튜디오 대여 장비는 </span>
+              <span>예약 신청에 의해서만 사용이 가능합니다.</span>
             </div>
             <div className="content__tools__detail--hidden">
               스튜디오 내부 장비 (PC, 배경스크린, 조명 등)는 별도 예약 없이 사용

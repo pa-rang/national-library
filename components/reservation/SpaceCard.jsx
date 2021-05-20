@@ -4,7 +4,7 @@ import TimeBlock from "./TimeBlock";
 const SpaceCardWrapper = styled.div`
   display: flex;
   align-items: center;
-  width: 327px;
+  width: 100%;
   height: 128px;
   margin-bottom: 24px;
   border-radius: 16px;
@@ -75,8 +75,8 @@ const SpaceCard = ({ isPossible, cardNum }) => {
         </div>
         <div className="card__info__people">수용인원: 1명</div>
         <div className="card__info__time-blocks">
-          {timeList.map((time) => (
-            <TimeBlock isPossible={isPossible} time={time} />
+          {timeList.map((time, idx) => (
+            <TimeBlock key={idx} isPossible={isPossible} time={time} />
           ))}
         </div>
       </div>
