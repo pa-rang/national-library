@@ -5,53 +5,52 @@ import MainTop from '../components/Home/MainTop';
 import styled from '@emotion/styled';
 
 const HomeWrapper = styled.div`
-  display: flex;
-  flex-direction: column; 
-  align-items: center;
-  .content {
-    max-width: 1200px;
-    width: 100%;
-    //padding: 0 24px;
-    text-align: center;
-    &__title span:nth-of-type(2n + 1) {
-      color: #fec108;
-    }
-    &__title {
-      margin-top: 12px;
-      font-size: 14px;
-      font-weight: 500;
-    }
-    &__alert span:nth-of-type(2n) {
-      color: #fec108;
-    }
-    &__alert {
-      margin-top: 12px;
-      font-size: 14px;
-      font-weight: 500;
-      margin-bottom: 10px;
-    }
-  }
-  .content__card {
-    display: grid;
-    grid-template-columns: repeat(2, auto);
-    row-gap: 12px;
-  }
-  @media screen and (min-width: 1000px) {
-    .content__title {
-      font-size: 30px;
-      margin-bottom: 10px;
-    }
-    .content__alert {
-      font-size: 21px;
-      font-weight: 550;
-      margin-top: 27px;
-      margin-bottom: 60px;
-    }
-    .content__card {
-      grid-template-columns: repeat(4, auto);
-    }
-  }
-}
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	.content {
+		max-width: 1200px;
+		width: 100%;
+		//padding: 0 24px;
+		text-align: center;
+		&__title span:nth-of-type(2n + 1) {
+			color: #fec108;
+		}
+		&__title {
+			margin-top: 12px;
+			font-size: 14px;
+			font-weight: 500;
+		}
+		&__alert span:nth-of-type(2n) {
+			color: #fec108;
+		}
+		&__alert {
+			margin-top: 12px;
+			font-size: 14px;
+			font-weight: 500;
+			margin-bottom: 10px;
+		}
+	}
+	.content__card {
+		display: grid;
+		grid-template-columns: repeat(2, auto);
+		row-gap: 12px;
+	}
+	@media screen and (min-width: 1000px) {
+		.content__title {
+			font-size: 30px;
+			margin-bottom: 10px;
+		}
+		.content__alert {
+			font-size: 21px;
+			font-weight: 550;
+			margin-top: 27px;
+			margin-bottom: 60px;
+		}
+		.content__card {
+			grid-template-columns: repeat(4, auto);
+		}
+	}
 `;
 
 const userData = {
