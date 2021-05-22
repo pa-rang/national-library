@@ -270,6 +270,7 @@ function Reservation() {
 	return (
 		<>
 			<Navbar />
+
 			<Header />
 			<ReservationWrapper>
 				<div className="content">

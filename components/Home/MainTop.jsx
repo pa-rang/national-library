@@ -59,7 +59,7 @@ function MainTop() {
 	return (
 		<MainTopWrap>
 			<div className="title">
-				좌석예약 &nbsp;
+				  좌석예약 &nbsp;
 				<span>
 					예약{} 불이행{} 이용제한
 				</span>

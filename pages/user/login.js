@@ -10,7 +10,7 @@ const mockData = {
 };
 
 function Login() {
-	return (
+	return (   
 		<div>
 			<LoginTitle>{mockData.title}</LoginTitle>
 		</div>
