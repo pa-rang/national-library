@@ -57,9 +57,8 @@ const HomeCardWrapper = styled.div`
 
 function HomeCard({ card }) {
 	const router = useRouter();
-	const { image, title, desc, button, clickable } = card;
-	const btnColor = clickable === true ? 'navy' : 'gray';
-
+	const { image, title, desc, button, isAvailable } = card;
+	const btnColor = isAvailable === true ? 'navy' : 'gray';
 	return (
 		<>
 			<HomeCardWrapper>

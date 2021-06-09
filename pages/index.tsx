@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from '../components/common/Navbar';
 import HomeCard from '../components/Home/HomeCard';
 import MainTop from '../components/Home/MainTop';
 import styled from '@emotion/styled';
+import { reservationApi } from '../lib/api';
 
 const HomeWrapper = styled.div`
 	display: flex;
@@ -56,18 +57,18 @@ const HomeWrapper = styled.div`
 const userData = {
 	id: '1',
 	nickname: '안소현',
-	photoUrl: '/assets/images/simple.svg',
-	reservation: 1,
+	photoUrl: '/assets/images/EmptyProfile.svg',
+	reservation: 0,
 };
 
-const mockData = [
+const cardData = [
 	{
 		id: '1',
 		image: '/assets/icons/Digital.svg',
 		title: '디지털 열람석',
 		desc: '디지털자료 열람 및 문서 편집 공간',
 		button: '예약',
-		clickable: true,
+		isAvailable: true,
 	},
 	{
 		id: '2',
@@ -75,7 +76,7 @@ const mockData = [
 		title: '원문 DB석',
 		desc: '원문 DB 열람 전용 공간',
 		button: '예약',
-		clickable: true,
+		isAvailable: true,
 	},
 	{
 		id: '3',
@@ -83,7 +84,7 @@ const mockData = [
 		title: '미디어 편집석',
 		desc: '영상, 음향, 이미지 콘텐츠 편집 공간',
 		button: '예약',
-		clickable: true,
+		isAvailable: true,
 	},
 	{
 		id: '4',
@@ -91,7 +92,7 @@ const mockData = [
 		title: '미디어자료이용석',
 		desc: '멀티미디어 콘텐츠 열람 공간 자료3점 이용가능',
 		button: '1인석',
-		clickable: true,
+		isAvailable: true,
 	},
 	{
 		id: '5',
@@ -99,7 +100,7 @@ const mockData = [
 		title: '스튜디오',
 		desc: '영상, 음향등 미디어 콘텐츠 창작, 공유 공간',
 		button: '스튜디오 1-6',
-		clickable: true,
+		isAvailable: true,
 	},
 	{
 		id: '6',
@@ -107,7 +108,7 @@ const mockData = [
 		title: '노트북이용석',
 		desc: '1인 1석 본인노트북 사용 (노트북 대여 없음)',
 		button: '예약',
-		clickable: true,
+		isAvailable: true,
 	},
 	{
 		id: '7',
@@ -115,12 +116,50 @@ const mockData = [
 		title: '세미나실',
 		desc: '그룹별 세미나 공간',
 		button: '현재 이용 불가',
-		clickable: false,
+		isAvailable: true,
 	},
 ];
 
 function Home() {
 	const { nickname, photoUrl, reservation } = userData;
+	const [stud, setStud] = useState([]);
+	const [semi, setSemi] = useState([]);
+
+	useEffect(() => {
+		(async () => {
+			try {
+				const [studioData, seminarData] = await Promise.all([reservationApi.getStudio(), reservationApi.getSeminar()]);
+				setStud(studioData.data);
+				setSemi(seminarData.data);
+				console.log(studioData.data);
+				console.log(seminarData.data);
+			} catch (e) {
+				console.log(e);
+				return null;
+			}
+		})();
+	}, []);
+
+	//studio 이용가능 여부 체크
+	const studioReservation = stud.map(e => e.reservationNow);
+	var studioArr = [];
+	for (let i = 0; i < studioReservation.length; i++) {
+		var isFalse = studioReservation[i].every(v => v === false);
+		isFalse ? studioArr.push(false) : studioArr.push(true);
+	}
+	const unavailableStudio = studioArr.every(v => v === false);
+	unavailableStudio ? (cardData[4].isAvailable = false) : (cardData[4].isAvailable = true);
+
+	//seminar 이용가능 여부 체크
+	const seminarReservation = semi.map(e => e.reservationNow);
+	var seminarArr = [];
+	for (let i = 0; i < seminarReservation.length; i++) {
+		var isFalsee = seminarReservation[i].every(v => v === false);
+		isFalsee ? seminarArr.push(false) : seminarArr.push(true);
+	}
+	const unavailableSeminar = seminarArr.every(v => v === false);
+	unavailableSeminar ? (cardData[6].isAvailable = false) : (cardData[6].isAvailable = true);
+
 	return (
 		<>
 			<Navbar theme={true} nickname={nickname} photoUrl={photoUrl}></Navbar>
@@ -142,7 +181,7 @@ function Home() {
 						<span> 중입니다. </span>
 					</div>
 					<div className="content__card">
-						{mockData.map(card => (
+						{cardData.map(card => (
 							<HomeCard card={card} key={card.id} />
 						))}
 					</div>
