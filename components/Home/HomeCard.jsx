@@ -60,20 +60,18 @@ function HomeCard({ card }) {
 	const { image, title, desc, button, isAvailable } = card;
 	const btnColor = isAvailable === true ? 'navy' : 'gray';
 	return (
-		<>
-			<HomeCardWrapper>
-				<div className="card__image">
-					<img width="68px" height="68px" src={image} />
-				</div>
-				<div className="card__title">{title}</div>
-				<div className="card__desc">{desc}</div>
-				<div className="card__button">
-					<Link href="/reservation">
-						<StyledButton appearance={btnColor}>{button}</StyledButton>
-					</Link>
-				</div>
-			</HomeCardWrapper>
-		</>
+		<HomeCardWrapper>
+			<div className="card__image">
+				<img width="68px" height="68px" src={image} />
+			</div>
+			<div className="card__title">{title}</div>
+			<div className="card__desc">{desc}</div>
+			<div className="card__button">
+				<Link href="/reservation">
+					<StyledButton appearance={btnColor}>{button}</StyledButton>
+				</Link>
+			</div>
+		</HomeCardWrapper>
 	);
 }
 export default HomeCard;
