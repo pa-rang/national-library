@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import Navbar from '../components/reservation/Navbar';
 import Header from '../components/reservation/Header';
 import DateButton from '../components/reservation/DateButton';
 import SpaceCard from '../components/reservation/SpaceCard';
 import ToolButton from '../components/reservation/ToolButton';
+import { getStudioInfo } from '../lib/api/api';
 
 const ReservationWrapper = styled.div`
 	display: flex;
@@ -209,64 +210,19 @@ const ReservationWrapper = styled.div`
 	}
 `;
 
-const spaceInfo = [
-	{
-		spaceNum: 1,
-		isPossible: true,
-	},
-	{
-		spaceNum: 2,
-		isPossible: false,
-	},
-	{
-		spaceNum: 3,
-		isPossible: false,
-	},
-	{
-		spaceNum: 4,
-		isPossible: false,
-	},
-	{
-		spaceNum: 5,
-		isPossible: true,
-	},
-	{
-		spaceNum: 6,
-		isPossible: false,
-	},
-];
+const tools = ['삼각대', '웹캠', '카메라', '조명', '스크린', '마이크', '프롬프터'];
 
-const tools = [
-	{
-		text: '삼각대',
-		isSelected: false,
-	},
-	{
-		text: '웹캠',
-		isSelected: true,
-	},
-	{
-		text: '카메라',
-		isSelected: false,
-	},
-	{
-		text: '조명',
-		isSelected: false,
-	},
-	{
-		text: '스크린',
-		isSelected: false,
-	},
-	{
-		text: '마이크',
-		isSelected: false,
-	},
-	{
-		text: '프롬프터',
-		isSelected: false,
-	},
-];
+const dates = ['05-14(금)', '05-15(토)', '05-16(일)', '05-17(월)'];
 function Reservation() {
+	const [studioInfo, setStudioInfo] = useState([]);
+
+	useEffect(() => {
+		(async () => {
+			const data = await getStudioInfo();
+			setStudioInfo(data);
+		})();
+	}, []);
+
 	return (
 		<>
 			<Navbar />
@@ -281,10 +237,9 @@ function Reservation() {
 						</div>
 						<hr />
 						<div className="content__date__buttons">
-							<DateButton />
-							<DateButton isSelected />
-							<DateButton />
-							<DateButton />
+							{dates.map((date, idx) => (
+								<DateButton key={idx} date={date} />
+							))}
 						</div>
 					</div>
 					<div className="content__space">
@@ -297,8 +252,13 @@ function Reservation() {
 						</div>
 						<hr />
 						<div className="content__space__cards">
-							{spaceInfo.map(space => (
-								<SpaceCard key={space.spaceNum} cardNum={space.spaceNum} isPossible={space.isPossible} />
+							{studioInfo.map(studio => (
+								<SpaceCard
+									key={studio.roomNumber}
+									roomNumber={studio.roomNumber}
+									reservationStatus={studio.reservationNow}
+									isPossible={studio.reservationNow.some(res => res === false)}
+								/>
 							))}
 						</div>
 					</div>
@@ -308,7 +268,7 @@ function Reservation() {
 						<div className="content__tools__search">제공장비 검색</div>
 						<div className="content__tools__buttons">
 							{tools.map((tool, idx) => (
-								<ToolButton key={idx} text={tool.text} isSelected={tool.isSelected} />
+								<ToolButton key={idx} tool={tool} />
 							))}
 						</div>
 						<div className="content__tools__detail">
