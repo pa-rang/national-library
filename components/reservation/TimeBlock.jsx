@@ -48,12 +48,12 @@ const TimeBlock = ({ isReserved, time }) => {
 		<TimeBlockWrapper isReserved={isReserved}>
 			<div className="time">{time}</div>
 			<div className="time-blocks">
-				<div className="time-block"></div>
-				<div className="time-block"></div>
-				<div className="time-block"></div>
-				<div className="time-block"></div>
-				<div className="time-block"></div>
-				<div className="time-block"></div>
+				<div className="time-block" />
+				<div className="time-block" />
+				<div className="time-block" />
+				<div className="time-block" />
+				<div className="time-block" />
+				<div className="time-block" />
 			</div>
 		</TimeBlockWrapper>
 	);
