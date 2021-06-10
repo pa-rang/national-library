@@ -12,7 +12,6 @@ const HomeWrapper = styled.div`
 	.content {
 		max-width: 1200px;
 		width: 100%;
-		//padding: 0 24px;
 		text-align: center;
 		&__title span:nth-of-type(2n + 1) {
 			color: #fec108;
@@ -122,17 +121,15 @@ const cardData = [
 
 function Home() {
 	const { nickname, photoUrl, reservation } = userData;
-	const [stud, setStud] = useState([]);
-	const [semi, setSemi] = useState([]);
+	const [studio, setStudio] = useState([]);
+	const [seminar, setSeminar] = useState([]);
 
 	useEffect(() => {
 		(async () => {
 			try {
 				const [studioData, seminarData] = await Promise.all([reservationApi.getStudio(), reservationApi.getSeminar()]);
-				setStud(studioData.data);
-				setSemi(seminarData.data);
-				console.log(studioData.data);
-				console.log(seminarData.data);
+				setStudio(studioData.data);
+				setSeminar(seminarData.data);
 			} catch (e) {
 				console.log(e);
 				return null;
@@ -141,24 +138,28 @@ function Home() {
 	}, []);
 
 	//studio 이용가능 여부 체크
-	const studioReservation = stud.map(e => e.reservationNow);
-	var studioArr = [];
-	for (let i = 0; i < studioReservation.length; i++) {
-		var isFalse = studioReservation[i].every(v => v === false);
+	const studioReservation = studio.map(e => e.reservationNow);
+	const studioArr = [];
+	studioReservation.map(data => {
+		const isFalse = data.every(v => v === false);
 		isFalse ? studioArr.push(false) : studioArr.push(true);
-	}
-	const unavailableStudio = studioArr.every(v => v === false);
-	unavailableStudio ? (cardData[4].isAvailable = false) : (cardData[4].isAvailable = true);
+		return studioArr;
+	});
+	const isUnavailableStudio = studioArr.every(v => v === false);
+	const studioCardData = cardData.find(card => card.id === '5');
+	isUnavailableStudio ? (studioCardData.isAvailable = false) : (studioCardData.isAvailable = true);
 
 	//seminar 이용가능 여부 체크
-	const seminarReservation = semi.map(e => e.reservationNow);
-	var seminarArr = [];
-	for (let i = 0; i < seminarReservation.length; i++) {
-		var isFalsee = seminarReservation[i].every(v => v === false);
+	const seminarReservation = seminar.map(e => e.reservationNow);
+	const seminarArr = [];
+	seminarReservation.map(data => {
+		const isFalsee = data.every(v => v === false);
 		isFalsee ? seminarArr.push(false) : seminarArr.push(true);
-	}
-	const unavailableSeminar = seminarArr.every(v => v === false);
-	unavailableSeminar ? (cardData[6].isAvailable = false) : (cardData[6].isAvailable = true);
+		return seminarArr;
+	});
+	const isUnavailableSeminar = seminarArr.every(v => v === false);
+	const seminarCardData = cardData.find(card => card.id === '7');
+	isUnavailableSeminar ? (seminarCardData.isAvailable = false) : (seminarCardData.isAvailable = true);
 
 	return (
 		<>
