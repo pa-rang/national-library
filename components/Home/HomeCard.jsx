@@ -2,6 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import StyledButton from '../common/StyledButton';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 const HomeCardWrapper = styled.div`
 	width: 154px;
@@ -56,7 +57,6 @@ const HomeCardWrapper = styled.div`
 `;
 
 function HomeCard({ card }) {
-	const router = useRouter();
 	const { image, title, desc, button, isAvailable } = card;
 	const btnColor = isAvailable === true ? 'navy' : 'gray';
 	return (
@@ -68,9 +68,9 @@ function HomeCard({ card }) {
 				<div className="card__title">{title}</div>
 				<div className="card__desc">{desc}</div>
 				<div className="card__button">
-					<StyledButton appearance={btnColor} onClick={() => router.push('/reservation')}>
-						{button}
-					</StyledButton>
+					<Link href="/reservation">
+						<StyledButton appearance={btnColor}>{button}</StyledButton>
+					</Link>
 				</div>
 			</HomeCardWrapper>
 		</>
