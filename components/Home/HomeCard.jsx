@@ -62,7 +62,9 @@ function HomeCard({ card }) {
 	return (
 		<HomeCardWrapper>
 			<div className="card__image">
-				<img width="68px" height="68px" src={image} />
+				<Link href="/reservation">
+					<img width="68px" height="68px" src={image} />
+				</Link>
 			</div>
 			<div className="card__title">{title}</div>
 			<div className="card__desc">{desc}</div>
