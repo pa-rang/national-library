@@ -252,7 +252,7 @@ function Reservation() {
 						</div>
 						<hr />
 						<div className="content__space__cards">
-							{studioInfo.map(studio => (
+							{studioInfo?.map(studio => (
 								<SpaceCard
 									key={studio.roomNumber}
 									roomNumber={studio.roomNumber}
